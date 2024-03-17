@@ -11,21 +11,72 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = UserModel::create([
-            'username' => 'manager11',
-            'name' => 'Manager11',
-            'password' => Hash::make('12345'),
-            'level_id' => 2,
+
+        $user = UserModel::all();
+
+        return view('user', ['data' => $user]);
+
+    }
+
+    public function tambah()
+    {
+        return view('user_tambah');
+    }
+
+    public function tambah_simpan(Request $request)
+    {
+        UserModel::create([
+            'username' => $request->username,
+            'name' => $request->name,
+            'password' => Hash::make($request->password),
+            'level_id' => $request->level_id
         ]);
 
-        $user->username = 'manager12';
+        return redirect('/user');
+    }
+
+    public function ubah($id)
+    {
+        $user = UserModel::find($id);
+        return view('user_ubah', ['data' => $user]);
+    }
+
+    public function ubah_simpan($id, Request $request)
+    {
+        $user = UserModel::find($id);
+        
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->password = Hash::make($request->password);
+        $user->level_id = $request->level_id;
         $user->save();
 
-        $user->wasChanged(); //true
-        $user->wasChanged('username'); //true
-        $user->wasChanged(['name', 'username']); //true
-        $user->wasChanged('name'); //false
-        dd($user->wasChanged(['name', 'username'])); //true
+        return redirect('/user');
+    }
+
+    public function hapus($id)
+    {
+        $user = UserModel::find($id);
+        $user->delete();
+
+        return redirect('/user');
+    }
+
+        // $user = UserModel::create([
+        //     'username' => 'manager11',
+        //     'name' => 'Manager11',
+        //     'password' => Hash::make('12345'),
+        //     'level_id' => 2,
+        // ]);
+
+        // $user->username = 'manager12';
+        // $user->save();
+
+        // $user->wasChanged(); //true
+        // $user->wasChanged('username'); //true
+        // $user->wasChanged(['name', 'username']); //true
+        // $user->wasChanged('name'); //false
+        // dd($user->wasChanged(['name', 'username'])); //true
 
 
         // $user = UserModel::create([
@@ -53,7 +104,7 @@ class UserController extends Controller
         // $user->isClean(); //true
         // dd($user->isDirty());
 
-        //return view('user', ['data' => $user]);
+        
 
         // $user = UserModel::firstOrNew(
         //     [
@@ -107,5 +158,5 @@ class UserController extends Controller
         // UserModel::create($data);
 
         //$user = UserModel::firstWhere('level_id', 1);
-    }
+    
 }
