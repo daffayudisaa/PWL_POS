@@ -21,7 +21,8 @@
                 <td>{{$d->username}}</td>
                 <td>{{$d->name}}</td>
                 <td>{{$d->level_id}}</td>
-                <td><a href="{{ url('/user/ubah/'.$d->user_id) }}">Ubah</a> | <a href="{{ url('/user/hapus/'.$d->user_id) }}">Hapus</a></td>
+                <td><a href="{{ url('/user/ubah/'.$d->user_id) }}">Ubah</a> | 
+                    <a href="{{ url('/user/hapus/'.$d->user_id) }}">Hapus</a></td>
             </tr>
             @endforeach
         </table>
