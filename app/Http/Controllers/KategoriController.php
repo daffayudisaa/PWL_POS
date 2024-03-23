@@ -22,9 +22,10 @@ class KategoriController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
         KategoriModel::create([
-            'kategori_kode' => $request->kodeKategori,
-            'kategori_nama' => $request->namaKategori,
+            'kategori_kode' => $request->kategori_kode,
+            'kategori_nama' => $request->kategori_nama,
         ]);
         return redirect('/kategori');
     }
