@@ -43,6 +43,12 @@ class KategoriController extends Controller
         return redirect('/kategori');    
     }
 
+    public function destroy($id) {
+        KategoriModel::find($id)->delete();
+
+        return redirect('/kategori');
+    }
+
         // $data=[
         //     'kategori_kode' => 'SNK',
         //     'kategori_nama' => 'Snack / Makanan Ringan',

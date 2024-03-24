@@ -25,7 +25,10 @@ class KategoriDataTable extends DataTable
             /* ->addColumn('action', 'kategori.action') */
             ->setRowId('id')
             ->addcolumn('action', function($row){
-                return '<a href="kategori/edit/'.$row->kategori_id.'" class="edit btn-primary  btn-sm">Edit</a>';
+                $action = '<a href="kategori/edit/'.$row->kategori_id.'" class="edit btn-primary  btn-sm">Edit</a>';
+                $action .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                $action .= '<a href="kategori/delete/'.$row->kategori_id.'" class="delete btn-danger  btn-sm">Delete</a>';
+                return $action;
             });
     }
     /**
