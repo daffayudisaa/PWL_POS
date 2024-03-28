@@ -21,6 +21,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/addUser', function () {
+    return view('/form/addUser');
+});
+
+Route::get('/addLevel', function () {
+    return view('/form/addLevel');
+});
+
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/user', [UserController::class, 'index']);
