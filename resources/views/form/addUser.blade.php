@@ -14,6 +14,21 @@
             <form>
                 <div class="row">
                     <div class="col">
+                        <!-- select -->
+                        <div class="form-group">
+                            <label>Level ID</label>
+                            <select class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <!-- text input -->
                         <div class="form-group">
                             <label>Username</label>
@@ -39,21 +54,7 @@
                       </div>
                   </div>
               </div>
-                <div class="row">
-                    <div class="col">
-                        <!-- select -->
-                        <div class="form-group">
-                            <label>Level ID</label>
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <a class="btn btn-primary" href="">Tambah</a>
             </form>
