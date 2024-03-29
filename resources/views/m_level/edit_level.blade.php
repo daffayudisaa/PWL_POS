@@ -1,62 +1,54 @@
 @extends('adminlte::page')
 @section('title', 'General Form')
 @section('content_header')
-    <h1>Form M_User</h1>
+    <h1>Form Edit M_Level</h1>
 @stop
 @section('content')
     <!-- general form elements disabled -->
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">M_User Tabel</h3>
+            <h3 class="card-title">Edit Data M_Level</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <form>
-                <div class="row">
-                    <div class="col">
-                        <!-- select -->
-                        <div class="form-group">
-                            <label>Level ID</label>
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+            <form method="POST" action="{{url ('m_level/update',$data->level_id)}}">
+                @csrf
+                @method('PUT')
+
                 <div class="row">
                     <div class="col">
                         <!-- text input -->
                         <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" class="form-control" placeholder="Masukkan Username">
+                            <label for="level_id">Level ID</label>
+                            <input type="text" class="form-control" id="level_id" name="level_id" 
+                                value="{{ $data->level_id}}" disabled>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="kodeLevel">Kode Level</label>
+                            <input type="text" class="form-control" id="kodeLevel" name="kodeLevel" 
+                                value="{{ $data->level_kode}}">  
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col">
                         <!-- textarea -->
                         <div class="form-group">
-                            <label>Nama</label>
-                            <input type="text" class="form-control" placeholder="Masukkan Nama">
+                            <label for="namaLevel">Nama Level</label>
+                            <input type="text" class="form-control" id="namaLevel" name="namaLevel" 
+                                value="{{ $data->level_nama}}">
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                  <div class="col">
-                      <!-- textarea -->
-                      <div class="form-group">
-                          <label>Password</label>
-                          <input type="password" class="form-control" placeholder="Masukkan Password">
-                      </div>
-                  </div>
-              </div>
-                
 
-                <a class="btn btn-primary" href="">Tambah</a>
+                <a href="{{url('/m_level')}}" class="btn btn-danger">Kembali</a>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
         <!-- /.card-body -->

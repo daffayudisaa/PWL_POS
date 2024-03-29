@@ -4,20 +4,36 @@
     <h1>Form M_Level</h1>
 @stop
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <!-- general form elements disabled -->
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">M_Level Tabel</h3>
+            <h3 class="card-title">Tambah Data M_Level</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <form>
+            <form method="POST" action="{{url ('/m_level')}}">
+                {{csrf_field()}}
                 <div class="row">
                     <div class="col">
                         <!-- text input -->
                         <div class="form-group">
-                            <label>Kode Level</label>
-                            <input type="text" class="form-control" placeholder="Masukkan Level Kode, Contoh: MKN">
+                            <label for="kodeLevel">Kode Level</label>
+                            <input type="text" class="@error('Kode Level') is-invalid" @enderror form-control" id="kodeLevel" name="kodeLevel" 
+                                placeholder="Untuk Administrator, Contoh: ADM">
+                                
+                                @error('kodeLevel')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
                         </div>
                     </div>
                 </div>
@@ -25,13 +41,12 @@
                     <div class="col">
                         <!-- textarea -->
                         <div class="form-group">
-                            <label>Nama Level</label>
-                            <input type="text" class="form-control" placeholder="Masukkan Nama Level">
+                            <label for="namaLevel">Nama Level</label>
+                            <input type="text" class="form-control" id="namaLevel" name="namaLevel" placeholder="Masukkan Nama Level">
                         </div>
                     </div>
                 </div>
-
-                <a class="btn btn-primary" href="">Tambah</a>
+                <button type="submit" class="btn btn-primary">Tambah</button>
             </form>
         </div>
         <!-- /.card-body -->
