@@ -14,12 +14,12 @@ class UserController extends Controller
 
     public function index(UserDataTable $dataTable)
     {
-        return $dataTable->render('m_user.index');
+        return $dataTable->render('user_tes.index');
     }
 
     public function create()
     {
-        return view('m_user.create_user');
+        return view('user_tes.create_user');
     }
 
     public function store(Request $request): RedirectResponse
@@ -41,12 +41,12 @@ class UserController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect('/m_user');
+        return redirect('/user_tes');
     }
 
     public function edit($id){
         $user = UserModel::find($id);
-        return view('m_user.edit_user', ['data' => $user]);
+        return view('user_tes.edit_user', ['data' => $user]);
     }
 
     public function update(Request $request, $id){
@@ -56,13 +56,13 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->password = $request->password;
         $user->save();
-        return redirect('/m_user');    
+        return redirect('/user_tes');    
     }
 
     public function destroy($id) {
         UserModel::find($id)->delete();
 
-        return redirect('/m_user');
+        return redirect('/user_tes');
     }
     
         

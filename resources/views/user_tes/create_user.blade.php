@@ -20,7 +20,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <form method="POST" action="{{url ('/m_user')}}">
+            <form method="POST" action="{{url ('/user_tes')}}">
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col">

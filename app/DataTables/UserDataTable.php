@@ -25,9 +25,9 @@ class UserDataTable extends DataTable
         return (new EloquentDataTable($query))
         ->setRowId('id')
         ->addcolumn('action', function($row){
-            $action = '<a href="m_user/edit/'.$row->user_id.'" class="edit btn-primary  btn-sm">Edit</a>';
+            $action = '<a href="user_tes/edit/'.$row->user_id.'" class="edit btn-primary  btn-sm">Edit</a>';
             $action .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-            $action .= '<a href="m_user/delete/'.$row->user_id.'" class="delete btn-danger  btn-sm">Delete</a>';
+            $action .= '<a href="user_tes/delete/'.$row->user_id.'" class="delete btn-danger  btn-sm">Delete</a>';
             return $action;
         });
     }

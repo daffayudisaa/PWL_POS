@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\POSController;
 use App\Http\Controllers\UserController;
 
 
@@ -46,11 +47,13 @@ Route::prefix('/m_level')->group(function () {
     Route::get('/delete/{id}', [LevelController::class, 'destroy'])->name('m_level.delete_level');
 });
 
-Route::prefix('/m_user')->group(function () {
+Route::prefix('/user_tes')->group(function () {
     Route::get('/', [UserController::class, 'index']);
     Route::get('/create', [UserController::class, 'create']);
     Route::post('/', [UserController::class, 'store']);
-    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('m_user.edit_user');
-    Route::put('/update/{id}', [UserController::class, 'update'])->name('m_user.update_user');
-    Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('m_user.delete_user');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user_tes.edit_user');
+    Route::put('/update/{id}', [UserController::class, 'update'])->name('user_tes.update_user');
+    Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('user_tes.delete_user');
 });
+
+Route::resource('m_user', POSController::class);

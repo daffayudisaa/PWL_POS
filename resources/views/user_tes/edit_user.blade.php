@@ -11,7 +11,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <form method="POST" action="{{url ('m_user/update',$data->user_id)}}">
+            <form method="POST" action="{{url ('user_tes/update',$data->user_id)}}">
                 @csrf
                 @method('PUT')
 
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <a href="{{url('/m_level')}}" class="btn btn-danger">Kembali</a>
+                <a href="{{url('/user_tes')}}" class="btn btn-danger">Kembali</a>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
