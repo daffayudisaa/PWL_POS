@@ -25,7 +25,11 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Level_id:</strong>
-                <input type="text" name="level_id" class="form-control" placeholder="Masukkan level">
+                <select name="level_id" class="form-control">
+                    @foreach ($level as $lvl)
+                        <option value="{{ $lvl->level_id }}">{{ $lvl->level_nama }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

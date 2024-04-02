@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\m_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\user\LevelController;
+use App\Models\LevelModel;
 
 
 
@@ -25,8 +27,8 @@ class POSController extends Controller
      */
     public function create()
     {
-        return view('m_user.create');
-    }
+        $level = LevelModel::all(); //mendapatkan data dari tabel level
+        return view('m_user.create', compact('level'));    }
 
     /**
      * Store a newly created resource in storage.
@@ -64,8 +66,9 @@ class POSController extends Controller
      */
     public function edit(string $id)
     {
+        $level = LevelModel::all(); //mendapatkan data dari tabel level
         $useri = m_user::find($id);
-        return view('m_user.edit', compact('useri'));
+        return view('m_user.edit', compact('useri', 'level'));
     }
 
     /**

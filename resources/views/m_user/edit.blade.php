@@ -1,13 +1,12 @@
 @extends('m_user/template')
 @section('content')
     <div class="row mt-5 mb-5">
-        <div class="col-lg-12 margin-tb">
-            <div class="float-left">
+        <div class="col-lg-12 margin-tb d-flex justify-content-between w-full">
+            <div class="w-full">
                 <h2>Edit User</h2>
             </div>
-            <div class="float-right">
-                <a class="btn btn-secondary" href="{{ route('m_user.index') }}">
-                    Kembali</a>
+            <div class="">
+                <a class="btn btn-secondary" href="{{ route('m_user.index') }}">Kembali</a>
             </div>
         </div>
     </div>
@@ -35,15 +34,18 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Level_id:</strong>
-                    <input type="text" name="level_id" value="{{ $useri->level_id }}" class="form-control"
-                        placeholder="Masukkan level">
+                    <select name="level_id" class="form-control">
+                        @foreach ($level as $lvl)
+                            <option value="{{ $lvl->level_id }}" @if($lvl->level_id == $useri->level_id) selected @endif>{{ $lvl->level_nama }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Username:</strong>
                     <input type="text" value= "{{ $useri->username }}" class="form-control" name="username"
-                        placeholder="Masukkan username"">
+                        placeholder="Masukkan username">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

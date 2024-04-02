@@ -1,13 +1,12 @@
 @extends('m_user/template')
 @section('content')
     <div class="row mt-5 mb-5">
-        <div class="col-lg-12 margin-tb">
-            <div class="float-left">
+        <div class="col-lg-12 margin-tb d-flex justify-content-between w-full">
+            <div class="w-full">
                 <h2> Show User</h2>
             </div>
-            <div class="float-right">
-                <a class="btn btn-secondary" href="{{ route('m_user.index') }}">
-                    Kembali</a>
+            <div class="">
+                <a class="btn btn-secondary" href="{{ route('m_user.index') }}">Kembali</a>
             </div>
         </div>
     </div>
