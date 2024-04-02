@@ -1,8 +1,8 @@
 @extends('m_user/template')
 @section('content')
     <div class="row mt-5 mb-5">
-        <div class="col-lg-12 margin-tb">
-            <div class="float-left">
+        <div class="col-lg-12 margin-tb d-flex justify-content-between w-full">
+            <div class="w-full">
                 <h2>Membuat Daftar User</h2>
             </div>
             <div class="float-right">
@@ -50,7 +50,7 @@
                 <input type="password" name="password" class="form-control" placeholder="Masukkan password"></input>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center"><br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         </div>

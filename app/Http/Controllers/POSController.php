@@ -40,6 +40,7 @@ class POSController extends Controller
         'level_id' => 'required',
         'username' => 'required',
         'name' => 'required',
+        'password' => 'required',
         ]);
         
         $userData = $request->all();
