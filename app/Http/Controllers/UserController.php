@@ -27,10 +27,13 @@ class UserController extends Controller
 
         $activeMenu = 'user';
 
+        $level = LevelModel::all();
+
         return view('user.index', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
-            'activeMenu' => $activeMenu
+            'activeMenu' => $activeMenu,
+            'level' => $level
         ]);
     }
 
@@ -38,6 +41,12 @@ class UserController extends Controller
     {
         $users = UserModel::select('user_id', 'username', 'name', 'level_id')
             ->with('level');
+
+        //Filter Data User Berdasarkan Level_ID
+        if($request->level_id){
+            $users->where('level_id', $request->level_id);
+        }
+
         return DataTables::of($users)
             ->addIndexColumn() // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
             ->addColumn('aksi', function ($user) { // menambahkan kolom aksi
