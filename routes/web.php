@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
@@ -23,7 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('/level', [LevelController::class, 'index']);
-Route::get('/kategori', [KategoriController::class, 'index']);
+//Route::get('/kategori', [KategoriController::class, 'index']);
 // Route::get('/user', [UserController::class, 'index']);
 // Route::get('/user/tambah', [UserController::class, 'tambah']);
 // Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
@@ -31,20 +32,37 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 // Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
 // Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
-Route::get('/kategori', [KategoriController::class, 'index']);
-Route::get('/kategori/create', [KategoriController::class, 'create']);
-Route::post('/kategori', [KategoriController::class, 'store']);
-Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
-Route::put('/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');
-Route::get('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.delete');
+Route::prefix('/barang')->group(function (){
+    Route::get('/', [BarangController::class, 'index']);
+    Route::post('/list', [BarangController::class, 'list']);
+    Route::get('/create', [BarangController::class, 'create']);
+    Route::post('/', [BarangController::class, 'store']);
+    Route::get('/{id}', [BarangController::class, 'show']);
+    Route::get('/edit/{id}', [BarangController::class, 'edit']);
+    Route::put('/{id}', [BarangController::class, 'update']);
+    Route::delete('/{id}', [BarangController::class, 'destroy']);
+});
 
-Route::prefix('/m_level')->group(function () {
+Route::prefix('/kategori')->group(function (){
+    Route::get('/', [KategoriController::class, 'index']);
+    Route::post('/list', [KategoriController::class, 'list']);
+    Route::get('/create', [KategoriController::class, 'create']);
+    Route::post('/', [KategoriController::class, 'store']);
+    Route::get('/{id}', [KategoriController::class, 'show']);
+    Route::get('/edit/{id}', [KategoriController::class, 'edit']);
+    Route::put('/{id}', [KategoriController::class, 'update']);
+    Route::delete('/{id}', [KategoriController::class, 'destroy']);
+});
+
+Route::prefix('/level')->group(function () {
     Route::get('/', [LevelController::class, 'index']);
+    Route::post('/list', [LevelController::class, 'list']);
     Route::get('/create', [LevelController::class, 'create']);
     Route::post('/', [LevelController::class, 'store']);
-    Route::get('/edit/{id}', [LevelController::class, 'edit'])->name('m_level.edit_level');
-    Route::put('/update/{id}', [LevelController::class, 'update'])->name('m_level.update_level');
-    Route::get('/delete/{id}', [LevelController::class, 'destroy'])->name('m_level.delete_level');
+    Route::get('/{id}', [LevelController::class, 'show']);
+    Route::get('/edit/{id}', [LevelController::class, 'edit']);
+    Route::put('/{id}', [LevelController::class, 'update']);
+    Route::delete('/{id}', [LevelController::class, 'destroy']);
 });
 
 Route::prefix('/user')->group(function () {
