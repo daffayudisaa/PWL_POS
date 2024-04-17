@@ -44,7 +44,7 @@
                     <label class="col-1 control-label col-form-label">Tanggal</label>
                     <div class="col-11">
                         <input type="date" class="form-control" id="penjualan_tanggal" name="penjualan_tanggal"
-                            value="{{ old('penjualan_tanggal') }}" required placeholder="Masukkan Tanggal Penjualan">
+                            value="{{ $date }}" readonly  placeholder="Masukkan Tanggal Penjualan">
                         @error('penjualan_tanggal')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror

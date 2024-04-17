@@ -80,7 +80,8 @@ class PenjualanController extends Controller
             'user' => $user,
             'barang' => $barang,
             'penjualan_kode' => $penjualan_kode,
-            'activeMenu' => $activeMenu
+            'activeMenu' => $activeMenu,
+            'date'=>date("Y-m-d")
         ]);
     }
 
@@ -114,7 +115,7 @@ class PenjualanController extends Controller
             'user_id' => $request->user_id,
             'penjualan_kode' => $request->penjualan_kode,
             'pembeli' => $request->pembeli,
-            'penjualan_tanggal' => $request->penjualan_tanggal
+            'penjualan_tanggal' => now(),
         ]);
 
         
