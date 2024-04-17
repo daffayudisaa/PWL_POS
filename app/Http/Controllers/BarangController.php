@@ -58,12 +58,12 @@ class BarangController extends Controller
     public function create()
     {
         $breadcrumb = (object)[
-            'title' => 'Tambah User',
-            'list' => ['Home', 'User', 'Tambah User']
+            'title' => 'Tambah Barang',
+            'list' => ['Home', 'Barang', 'Tambah Barang']
         ];
 
         $page = (object) [
-            'title' => 'Tambah User Baru'
+            'title' => 'Tambah Barang Baru'
         ];
 
         $kategori = KategoriModel::all();
