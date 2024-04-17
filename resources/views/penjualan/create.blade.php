@@ -44,7 +44,7 @@
                     <label class="col-1 control-label col-form-label">Tanggal</label>
                     <div class="col-11">
                         <input type="date" class="form-control" id="penjualan_tanggal" name="penjualan_tanggal"
-                            value="{{ $date }}" readonly  placeholder="Masukkan Tanggal Penjualan">
+                            value="{{ $date }}" readonly placeholder="Masukkan Tanggal Penjualan">
                         @error('penjualan_tanggal')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
@@ -77,7 +77,7 @@
                             </div>
                         </div>
 
-                        
+
                         <div class="form-group row">
                             <label class="col-1 control-label col-form-label">Harga</label>
                             <div class="col-11">
@@ -102,8 +102,18 @@
                 <button type="button" class="btn btn-success mt-3" id="tambahBarang">Tambah Barang</button>
                 <br><br><br>
                 <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn btn-warning" id="cekHarga">Cek Harga</button>
                 <a class="btn btn-default ml-1" href="{{ url('penjualan') }}">Kembali</a>
             </form>
+        </div>
+    </div>
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Total Transaksi</h3>
+            <br><br>
+            <label class="col-1 control-label col-form-label">
+                <span id="totalTransaksi">Rp. 0</span>
+            </label>
         </div>
     </div>
 @endsection
@@ -117,21 +127,23 @@
             $('#tambahBarang').click(function() {
                 var formBarang = $('#formBarang').clone();
                 formBarang.find('input').val('');
-
+    
                 var timestamp = new Date().getTime(); // Membuat ID unik
                 formBarang.find('select').attr('id', 'barang_id_' + timestamp);
                 formBarang.find('input[name="harga[]"]').attr('id', 'harga_' + timestamp);
-                formBarang.find('input[name="harga[]"]').attr('name','harga[]'); // Menghapus pengaturan name
+                formBarang.find('input[name="harga[]"]').attr('name',
+                    'harga[]'); // Menghapus pengaturan name
                 formBarang.find('input[name="jumlah[]"]').attr('id', 'jumlah_' + timestamp);
-                formBarang.find('input[name="jumlah[]"]').attr('name','jumlah[]'); // Menghapus pengaturan name
-
+                formBarang.find('input[name="jumlah[]"]').attr('name',
+                    'jumlah[]'); // Menghapus pengaturan name
+    
                 $('#formBarangContainer').append(formBarang);
-
+    
                 // Menambahkan tombol "Hapus" untuk menghapus formulir barang yang baru ditambahkan
                 formBarang.find('.hapusBarang').click(function() {
                     $(this).closest('.form-barang').remove();
                 });
-
+    
                 // Menambahkan penanganan perubahan harga untuk elemen formulir barang yang baru ditambahkan
                 $('#barang_id_' + timestamp).change(function() {
                     var selectedOption = $(this).find('option:selected');
@@ -139,13 +151,27 @@
                     $(this).closest('.form-barang').find('input[name="harga[]"]').val(harga_jual);
                 });
             });
-
+    
             // Menambahkan penanganan perubahan harga untuk elemen formulir barang yang asli
             $('#barang_id').change(function() {
                 var selectedOption = $(this).find('option:selected');
                 var harga_jual = selectedOption.data('harga_jual');
                 $('#harga').val(harga_jual);
             });
+    
+            $('#cekHarga').on('click', function() {
+                var total = 0;
+                // Loop melalui setiap form barang
+                $('.form-barang').each(function() {
+                    var jumlah = $(this).find('input[name="jumlah[]"]').val();
+                    var harga = $(this).find('input[name="harga[]"]').val();
+                    total += jumlah * harga; // Hitung total
+                });
+                // Tampilkan total di dalam span dengan id totalTransaksi
+                $('#totalTransaksi').text('Rp. ' + total);
+            });
+    
         });
     </script>
+    
 @endpush

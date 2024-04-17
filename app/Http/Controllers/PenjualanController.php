@@ -73,6 +73,7 @@ class PenjualanController extends Controller
 
         $counter = (PenjualanModel::selectRaw("CAST(RIGHT(penjualan_kode, 3) AS UNSIGNED) AS counter")->orderBy('penjualan_id', 'desc')->value('counter')) + 1;
         $penjualan_kode = 'PJ' . sprintf("%04d", $counter);
+        $total = 0;
 
         return view('penjualan.create', [
             'breadcrumb' => $breadcrumb,
@@ -81,7 +82,10 @@ class PenjualanController extends Controller
             'barang' => $barang,
             'penjualan_kode' => $penjualan_kode,
             'activeMenu' => $activeMenu,
-            'date'=>date("Y-m-d")
+            'date'=>date("Y-m-d"),
+            'total'=>$total
+
+            
         ]);
     }
 
@@ -98,6 +102,8 @@ class PenjualanController extends Controller
 
         ]);
 
+        $total = 0;
+
         foreach ($request->barang_id as $key => $barang_id) {
             // Cek stok yang tersedia
             $stok = StokModel::where('barang_id', $barang_id)->value('stok_jumlah');
@@ -109,6 +115,8 @@ class PenjualanController extends Controller
                 // Jika jumlah yang diminta melebihi stok yang tersedia, kembalikan pesan kesalahan
                 return redirect()->back()->withInput()->withErrors(['jumlah.' . $key => 'Jumlah Melebihi Stok yang Tersedia. Stok "' .$nama_barang.'" Saat Ini: ' . $stok]);
             }
+
+            $total += $request->jumlah[$key] * $request->harga[$key];
         }
 
         $penjualan = PenjualanModel::create([
