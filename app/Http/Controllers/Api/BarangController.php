@@ -24,14 +24,13 @@ class BarangController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $barang = BarangModel::create([
-            'barang_kode' => $request->barang_kode,
-            'barang_nama' => $request->barang_nama,
-            'harga_beli' => $request->harga_beli,
-            'harga_jual' => $request->harga_jual,
-            'kategori_id' => $request->kategori_id,
-            'image' => $request->image->hashName()
-        ]);
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $request->file('image')->storeAs('posts', $request->image->hashName());
+            $data['image'] = $request->image->hashName();
+        }
+        
+        $barang = BarangModel::create($data);
         
         return response()->json($barang, 201);
     }

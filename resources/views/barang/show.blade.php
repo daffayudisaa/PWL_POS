@@ -30,6 +30,12 @@
                         <td>{{ $barang->barang_nama }}</td>
                     </tr>
                     <tr>
+                        <th>Gambar</th>
+                        <td>
+                            <img src="{{ asset( $barang->image ) }}" alt="{{ $barang->barang_nama }}" class="img-thumbnail" width="150">
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Harga Beli</th>
                         <td>{{ $barang->harga_beli }}</td>
                     </tr>

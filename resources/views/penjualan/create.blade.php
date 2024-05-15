@@ -52,7 +52,7 @@
                 </div>
                 <br>
                 <div id="formBarangContainer">
-                    <div id="formBarang" class="form-barang">
+                    <div id="formBarang" class="form-barang" data-number="0">
                         <div class="card-header">
                             <h3 class="card-title">Detail Transaksi Barang</h3>
                             <div class="card-tools">
@@ -64,10 +64,10 @@
                         <div class="form-group row">
                             <label class="col-1 control-label col-form-label">Barang</label>
                             <div class="col-11">
-                                <select class="form-control" id="barang_id" name="barang_id[]" required>
+                                <select class="form-control" id="barang_id" name="barang_id[]" onchange="console.log(); showImage($(this).find(':selected').attr('data-url'),$(this).parents('#formBarang').attr('data-number'))" required>
                                     <option value="">- Pilih Barang -</option>
                                     @foreach ($barang as $item)
-                                        <option value="{{ $item->barang_id }}" data-harga_jual="{{ $item->harga_jual }}">
+                                        <option value="{{ $item->barang_id }}" data-url="{{$item->image}}" data-harga_jual="{{ $item->harga_jual }}">
                                             {{ $item->barang_nama }}</option>
                                     @endforeach
                                 </select>
@@ -89,6 +89,16 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-1 control-label col-form-label">Gambar</label>
+                            <div class="col-11">
+                                <img id="gambarPreview-0" src="" alt="Preview Gambar" style="max-width: 200px; max-height: 200px;">
+                                @error('harga.*')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-1 control-label col-form-label">Jumlah</label>
                             <div class="col-11">
                                 <input type="number" class="form-control" id="jumlah" name="jumlah[]" required>
@@ -97,6 +107,8 @@
                                 @enderror
                             </div>
                         </div>
+
+                        
                     </div>
                 </div>
                 <button type="button" class="btn btn-success mt-3" id="tambahBarang">Tambah Barang</button>
@@ -122,20 +134,24 @@
 @push('js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        function showImage(imgURL, imgID){
+            $('div[data-number="'+imgID+'"]').find('img').attr('src', imgURL);
+        }
+
         $(document).ready(function() {
             // Menambahkan form barang baru saat tombol "Tambah Barang" ditekan
             $('#tambahBarang').click(function() {
+                var timestamp = new Date().getTime(); // Membuat ID unik
                 var formBarang = $('#formBarang').clone();
+                formBarang.find('img').attr('src', '');
+                formBarang.attr('data-number', timestamp);
                 formBarang.find('input').val('');
     
-                var timestamp = new Date().getTime(); // Membuat ID unik
                 formBarang.find('select').attr('id', 'barang_id_' + timestamp);
                 formBarang.find('input[name="harga[]"]').attr('id', 'harga_' + timestamp);
-                formBarang.find('input[name="harga[]"]').attr('name',
-                    'harga[]'); // Menghapus pengaturan name
+                formBarang.find('input[name="harga[]"]').attr('name','harga[]'); // Menghapus pengaturan name
                 formBarang.find('input[name="jumlah[]"]').attr('id', 'jumlah_' + timestamp);
-                formBarang.find('input[name="jumlah[]"]').attr('name',
-                    'jumlah[]'); // Menghapus pengaturan name
+                formBarang.find('input[name="jumlah[]"]').attr('name','jumlah[]'); // Menghapus pengaturan name
     
                 $('#formBarangContainer').append(formBarang);
     

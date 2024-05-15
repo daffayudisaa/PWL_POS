@@ -52,6 +52,7 @@
                     <tr>
                         <th>No</th>
                         <th>Barang </th>
+                        <th>Gambar</th>
                         <th>Jumlah</th>
                         <th>Harga</th>
                         <th>Sub-Total</th>
@@ -64,6 +65,9 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $pd->barang->barang_nama }}</td>
+                            <td>
+                                <img src="{{ asset($pd->barang->image) }}" alt="{{ $pd->barang->barang_nama }}" class="img-thumbnail" width="150">
+                            </td>
                             <td>{{ $pd->jumlah }}</td>
                             <td>{{ $pd->harga }}</td>
                             <td>{{ $pd->harga * $pd->jumlah }}</td>
