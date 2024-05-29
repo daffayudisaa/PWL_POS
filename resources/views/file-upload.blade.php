@@ -16,6 +16,8 @@
         <form action="{{ url('/file-upload') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
+                <label for="namaBaruFile" class="form-label">Nama File</label>
+                <input type="text" class="form-control" placeholder="Masukkan Nama Baru Untuk File" id="namaBaruFile" name="namaBaruFile">
                 <label for="berkas" class="form-label">Gambar Profile</label>
                 <input type="file" class="form-control" id="berkas" name="berkas">
                 @error('berkas')
