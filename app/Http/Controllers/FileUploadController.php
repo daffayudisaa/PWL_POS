@@ -8,40 +8,54 @@ class FileUploadController extends Controller
 {
     public function fileUpload()
     {
-        return view('file-upload');
+        $breadcrumb = (object)[
+            'title' => 'File Upload',
+            'list' => ['Home', 'File Upload']
+        ];
+
+        $page = (object) [
+            'title' => 'Gunakan Untuk Mengupload File Gambar'
+        ];
+
+        $activeMenu = 'fileUpload';
+
+
+        return view('file-upload', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'activeMenu' => $activeMenu,
+        ]);
     }
 
     public function prosesFileUpload(Request $request)
     {
+
         $request->validate([
             'namaBaruFile' => 'required',
-            'berkas' => 'required|file|image|max:5000',]);
-            //$path = $request->berkas->store('uploads');
+            'berkas' => 'required|file|image|max:5000',
+        ]);
+
             $extfile = $request->berkas->getClientOriginalExtension();
             $namaFile = $request->namaBaruFile.".".$extfile;
-
             $path = $request->berkas->storeAs('uploads', $namaFile);
 
-            echo "Gambar Berhasil Diupload <a href='storage/$path'>$namaFile</a>";
-            echo "<br><br>";
-            echo "<img src='storage/$path' width='750px'>";
-        //echo $request->berkas->getClientOriginalName()."Lolos Validasi";
-        // dump($request->berkas);
-        // //return "Pemrosesan File Upload Disini";
-        // if($request->hasFile('berkas')){
-        //     echo "path(): ".$request->berkas->path();
-        //     echo "<br>";
-        //     echo "extension(): ".$request->berkas->extension();
-        //     echo "<br>";
-        //     echo "getClientOriginalExtension(): ".$request->berkas->getClientOriginalExtension();
-        //     echo "<br>";
-        //     echo "getMimeType(): ".$request->berkas->getMimeType();
-        //     echo "<br>";
-        //     echo "getClientOriginalName(): ".$request->berkas->getClientOriginalName();
-        //     echo "<br>";
-        //     echo "getSize(): ".$request->berkas->getSize();
-        // } else {
-        //     echo "Tidak Ada Berkas yang Diupload";
-        // }
+            $breadcrumb = (object)[
+                'title' => 'File Gambar Preview',
+                'list' => ['Home', 'File Preview']
+            ];
+    
+            $page = (object) [
+                'title' => 'Preview dari Gambar yang Telah Diupload'
+            ];
+    
+            $activeMenu = 'fileUpload';
+
+            return view('file-preview', [
+                'namaFile' => $namaFile,
+                'path' => $path,
+                'breadcrumb' => $breadcrumb,
+                'page' => $page,
+                'activeMenu' => $activeMenu,
+            ]);
     }
 }
